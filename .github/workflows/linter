@@ -1,12 +1,6 @@
 name: Lint Codebase
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: push
 
 jobs:
   lint:
@@ -18,33 +12,10 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v3
 
-    # Step 2: Set up your programming language environment
-    # For JavaScript/TypeScript
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18' # Use your desired version
 
-    # For Python (uncomment if using Python)
-    # - name: Setup Python
-    #   uses: actions/setup-python@v4
-    #   with:
-    #     python-version: '3.11' # Use your desired version
-
-    # Step 3: Install dependencies
-    - name: Install Dependencies
-      run: |
-        # JavaScript/TypeScript example
-        npm install
-        
-        # Python example (uncomment for Python)
-        # pip install -r requirements.txt
-
-    # Step 4: Run the linter
     - name: Run Linter
-      run: |
-        # JavaScript/TypeScript (ESLint example)
-        npx eslint .
+      uses: github/super-linter@v3
+      env:
+        DEFAULT_BRANCH: main
+        GITHUB_TOKEN: {{ secrets.GITHUB_TOKEN }}
 
-        # Python example (uncomment for Python)
-        # flake8 .
