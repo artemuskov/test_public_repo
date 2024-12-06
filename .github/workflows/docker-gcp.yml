@@ -7,7 +7,7 @@ on:
 
 env:
   REGION: northamerica-northeast2
-  GCP_PROJECT_ID: test-project-1
+  GCP_PROJECT_ID: test-project-1-443900
 
 jobs:
   build-and-push:
@@ -33,11 +33,11 @@ jobs:
     # Step 4: Build the Docker image
     - name: Build Docker Image
       run: |
-        IMAGE_NAME=$REGION-docker.pkg.dev/$GCP_PROJECT_ID/bash:latest
+        IMAGE_NAME=$REGION-docker.pkg.dev/$GCP_PROJECT_ID/bash/custom-bash:latest
         docker build -t $IMAGE_NAME .
 
     # Step 5: Push the Docker image to Artifact Registry
     - name: Push Docker Image
       run: |
-        IMAGE_NAME=$REGION-docker.pkg.dev/$GCP_PROJECT_ID/bash:latest
+        IMAGE_NAME=$REGION-docker.pkg.dev/$GCP_PROJECT_ID/bash/custom-bash:latest
         docker push $IMAGE_NAME
